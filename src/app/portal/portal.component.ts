@@ -10,6 +10,7 @@ import 'rxjs/add/operator/do';
 
 
 @Component({
+    // tslint:disable-next-line:component-selector
     selector: 'portal',
     templateUrl: 'portal.component.html'
 })
@@ -26,15 +27,16 @@ export class PortalComponent implements OnInit {
         // please note: modules.json will alwasy return registered as false.
         this.installedModules$ = this.moduleService.loadModules().do(res =>
             res.forEach(x => {
-                if(x.registered)
+                if (x.registered) {
                     this.registerRoute(x);
+                }
             })
         );
     }
 
     enableModule(moduleToEnable: ModuleData) {
         // enable or disable module
-        if(this.isRegistered(moduleToEnable)) {
+        if (this.isRegistered(moduleToEnable)) {
             this.routerService.unRegisterRoute(moduleToEnable.path);
         } else {
             this.registerRoute(moduleToEnable);
@@ -45,11 +47,12 @@ export class PortalComponent implements OnInit {
         return this.routerService.routeIsRegistered(moduleData.path);
     }
 
-    private registerRoute(moduleToEnable: ModuleData){
+    private registerRoute(moduleToEnable: ModuleData) {
         // load up the umd file and register the route whenever succeeded.
-        this.moduleService.loadModule(moduleToEnable).subscribe((exports) => {
+        this.moduleService.loadModuleSystemJS(moduleToEnable).then((exports) => {
            this.routerService.createAndRegisterRoute(moduleToEnable, exports);
-        }, () => this.showError(`${moduleToEnable.moduleName} could not be found, did you copy the umd file to ${moduleToEnable.location}?`));
+        }, () => this.showError(`${moduleToEnable.moduleName}
+        could not be found, did you copy the umd file to ${moduleToEnable.location}?`));
     }
 
     private showError(message: string) {

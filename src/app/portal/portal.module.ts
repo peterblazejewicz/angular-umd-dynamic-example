@@ -5,17 +5,18 @@ import { PortalComponent } from './portal.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-    imports: [
-        RouterModule.forChild([
-            {
-                path: '', component: PortalComponent
-            }
-        ]),
-        CommonModule
-],
-    exports: [],
-    declarations: [PortalComponent],
-    providers: [],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [
+    RouterModule.forChild([
+      {
+        path: '',
+        component: PortalComponent
+      }
+    ]),
+    CommonModule
+  ],
+  exports: [],
+  declarations: [PortalComponent],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class PortalModule { }
+export class PortalModule {}
