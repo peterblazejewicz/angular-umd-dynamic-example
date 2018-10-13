@@ -1,7 +1,12 @@
 import { ModuleService } from './services/module.service';
 import { RouterService } from './services/router.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, COMPILER_OPTIONS, CompilerFactory, Compiler } from '@angular/core';
+import {
+  NgModule,
+  COMPILER_OPTIONS,
+  CompilerFactory,
+  Compiler
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
@@ -16,33 +21,42 @@ export function createCompiler(compilerFactory: CompilerFactory) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent
-  ],
+  declarations: [AppComponent, DashboardComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ClarityModule,
-    RouterModule.forRoot([
-      {
-        path: '', redirectTo: 'dashboard', pathMatch: 'full'
-      },
-      {
-        path: 'dashboard', component: DashboardComponent
-      },
-      // Disabled because Compiler is not passed through correctly so PortalModule is not created successfull.
-      // {
-      //   path: 'portal', loadChildren: './portal/portal.module#PortalModule'
-      // }
-    ], {useHash: true}),
+    RouterModule.forRoot(
+      [
+        {
+          path: '',
+          redirectTo: 'dashboard',
+          pathMatch: 'full'
+        },
+        {
+          path: 'dashboard',
+          component: DashboardComponent
+        }
+        // Disabled because Compiler is not passed through correctly so PortalModule is not created successfull.
+        // {
+        //   path: 'portal', loadChildren: './portal/portal.module#PortalModule'
+        // }
+      ],
+      { useHash: true }
+    ),
     HttpModule
   ],
-  providers: [RouterService, ModuleService,
-    {provide: COMPILER_OPTIONS, useValue: {}, multi: true},
-    {provide: CompilerFactory, useClass: JitCompilerFactory, deps: [COMPILER_OPTIONS]},
-    {provide: Compiler, useFactory: createCompiler, deps: [CompilerFactory]}
+  providers: [
+    RouterService,
+    ModuleService,
+    { provide: COMPILER_OPTIONS, useValue: {}, multi: true },
+    {
+      provide: CompilerFactory,
+      useClass: JitCompilerFactory,
+      deps: [COMPILER_OPTIONS]
+    },
+    { provide: Compiler, useFactory: createCompiler, deps: [CompilerFactory] }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

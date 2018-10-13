@@ -44,16 +44,13 @@ import { Component, OnInit } from '@angular/core';
           <input type="text" id="formFields_13" size="35" readonly value="Readonly Text">
       </div>
   </section>
-</form>  
-  
+</form>
+
   `,
   styles: []
 })
 export class ModuleaComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

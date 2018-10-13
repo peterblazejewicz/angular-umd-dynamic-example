@@ -19,11 +19,9 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class ModulecComponent implements OnInit {
-  basic: boolean = false;
-  constructor() { }
+  basic = false;
 
   ngOnInit() {
     this.basic = true;
   }
-
 }
